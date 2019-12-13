@@ -1,0 +1,29 @@
+{% extends 'blog/base.html'%} {% load crispy_forms_tags %}{% block content %}
+<div class="profile-section">
+  <div class="profile-section-header">
+    <div class="profile-img">
+      <img
+        class="img-size rounded-circle"
+        src="{{ user.profile.profile_picture.url }}"
+        alt=""
+      />
+    </div>
+    <div class="profile-name">
+      <label class="lead" id="profile-name" for="">{{ user.username }}</label>
+      <label class="text-muted" for="">{{ user.email }}</label>
+    </div>
+  </div>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-fields">
+      {{ u_form | crispy }}
+    </div>
+    <div id="update-profile-pic">
+      {{ p_form.as_p }}
+    </div>
+    <div class="submit-button">
+      <button class="btn btn-info mt-2" type="submit">Update</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
